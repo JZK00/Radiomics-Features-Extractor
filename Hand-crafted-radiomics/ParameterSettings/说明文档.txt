@@ -1,0 +1,16 @@
+#################JZK-20210115##############
+参考说明文档https://pyradiomics.readthedocs.io/en/latest/index.html，进行参数文件的设置。
+
+针对CT、MRI等不同的数据类型，选择不同的提取参数，提高组学研究的精确度和鲁棒性。
+
+--imageType：
+用于选择图像的转换方式，然后在此基础上进行后面的特征提取。Original，Wavelet，LoG是最常用的。
+
+--featureClass：
+用于选择提取的特征类型，可以自定义选择。
+
+--setting：
+用于设置图像和标签的读取方式和预处理等操作，包括图像归一化、重采样等。
+
+--voxelSetting:
+同上。

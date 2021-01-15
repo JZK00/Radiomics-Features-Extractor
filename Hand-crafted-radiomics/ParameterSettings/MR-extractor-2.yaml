@@ -1,0 +1,99 @@
+#######http://www.mpip.sdnu.edu.cn/##############################################################
+#######https://pyradiomics.readthedocs.io/en/latest/index.html###################################
+#######MRI-based Radiomics Extraction using PyRadiomics #########################################
+
+imageType:
+  Original: {}
+  LoG:
+    # If the in-plane spacing is large (> 2mm), consider removing sigma value 1.
+    sigma: [1.0, 3.0, 5.0]
+  Wavelet: {}
+    #start_level: 0
+    #level: 3
+    #wavelet: 'coif1' # There are many other wavelet algorithms.
+  Square: {}
+  SquareRoot: {}
+  Logarithm: {}
+  Exponential: {}
+  #Gradient：{}
+  #LocalBinaryPattern2D：{}
+  #LocalBinaryPattern3D：{}
+
+featureClass:
+  shape:
+  firstorder:
+  glcm:  # Disable SumAverage by specifying all other GLCM features available
+    - 'Autocorrelation'
+    - 'JointAverage'
+    - 'ClusterProminence'
+    - 'ClusterShade'
+    - 'ClusterTendency'
+    - 'Contrast'
+    - 'Correlation'
+    - 'DifferenceAverage'
+    - 'DifferenceEntropy'
+    - 'DifferenceVariance'
+    - 'JointEnergy'
+    - 'JointEntropy'
+    - 'Imc1'
+    - 'Imc2'
+    - 'Idm'
+    - 'Idmn'
+    - 'Id'
+    - 'Idn'
+    - 'InverseVariance'
+    - 'MaximumProbability'
+    - 'SumEntropy'
+    - 'SumSquares'
+  glrlm:
+  glszm:
+  gldm:
+  ngtdm:
+
+setting:
+  # Normalization:
+  # MR signal is usually relative, with large differences between scanners and vendors. By normalizing the image before
+  # feature calculation, this confounding effect may be reduced. However, if only one specific scanner is used, or the
+  # images reflect some absolute world value (e.g. ADC maps, T2maps (NOT T2 weighted)), consider disabling the
+  # normalization.
+  normalize: true
+  normalizeScale: 100  # This allows you to use more or less the same bin width.
+
+  # Resampling:
+  # Not enabled in this example. However, because texture calculation assumes isotropic spacing, a forced 2D extraction
+  # is used, therefore only requiring the voxels to be isotropic in-plane. Enable pre-cropping to reduce memory
+  # footprint and speed up applying the filters.
+  preCrop: true
+
+  # Forced 2D extracion:
+  # This allows to calculate texture features using anisotropic voxels (although it assumes that voxels are isotropic
+  # in-plane). This is an alternative to resampling the image to isotropic voxels.
+  force2D: true
+  force2Ddimension: 0  # axial slices, for coronal slices, use dimension 1 and for sagittal, dimension 2.
+
+  # Mask validation:
+  # correctMask and geometryTolerance are not needed, as both image and mask are resampled, if you expect very small
+  # masks, consider to enable a size constraint by uncommenting settings below:
+  #minimumROIDimensions: 2
+  #minimumROISize: 50
+
+  # Image discretization:
+  # The ideal number of bins is somewhere in the order of 16-128 bins. A possible way to define a good binwidt is to
+  # extract firstorder:Range from the dataset to analyze, and choose a binwidth so, that range/binwidth remains approximately
+  # in this range of bins.
+  binWidth: 5
+
+  # first order specific settings:
+  # When normalizing, gray values below the mean will be negative. Shifting by 300 (3 StdDevs * 100) ensures that the
+  # majority of voxels is positive (only outliers >3 SD lower than the mean will be negative).
+  voxelArrayShift: 300
+
+  # Misc:
+  # default label value. Labels can also be defined in the call to featureextractor.execute, as a commandline argument,
+  # or in a column "Label" in the input csv (batchprocessing)
+  label: 1
+
+#voxelSetting:
+#  kernelRadius: 2
+#  maskedKernel: true
+#  initValue: nan

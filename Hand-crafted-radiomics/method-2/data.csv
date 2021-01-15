@@ -1,0 +1,5 @@
+"ID	",Image,Mask
+"1	",D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/01/t1.nrrd,D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/01/label.nrrd
+"2	",D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/01/t2.nrrd,D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/01/label.nrrd
+"3	",D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/02/t1.nrrd,D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/02/label.nrrd
+"4	",D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/02/t2.nrrd,D:/Radiomics-Feature-Extractor/Hand-crafted-radiomics/data/02/label.nrrd

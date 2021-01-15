@@ -1,0 +1,5 @@
+################JZK-20210115#####################
+1. 本目录下打开cmd窗口。
+2. 参考pyradiomics.txt文件设置输入参数。
+3. 如 pyradiomics data.csv -p tumor.yaml -o feature.csv -f csv。
+4. 会生成feature.csv，其中为data.csv相应的影像数据的组学特征。
